@@ -1,0 +1,27 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "a:log": "sh -c 'pnpm add \"$1\" --reporter ndjson | tee -a ./../logs/pnpm.log' --",
+      "d:log": "sh -c 'pnpm add -D \"$1\" --reporter ndjson | tee -a  ./..logs/pnpm.log' --",
+      "i:log": "pnpm install --reporter ndjson | tee -a  ./..logs/pnpm.log'"
+  },
+  "dependencies": {
+    "react": "^18",
+    "react-dom": "^18",
+    "next": "14.2.4"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1"
+  }
+}

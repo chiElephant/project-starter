@@ -1,0 +1,22 @@
+# Root
+../logs
+../.env
+../.gitignore
+../node_modules
+../package.json
+../pnpm-lock.yaml
+
+# Frontend
+../web/node_modules
+../web/public
+../web/.gitignore
+../web/.local.env
+../web/package.json
+../web/pnpm-lock.yaml
+
+# Backend
+../api/node_modules
+../api/.env
+../api/dist
+../api/package.json
+../api/pnpm-lock.yaml
