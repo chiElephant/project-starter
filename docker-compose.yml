@@ -1,0 +1,34 @@
+services:
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    # volumes:
+    #   - ./frontend:/app
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+    command: ['pnpm', 'dev']
+    networks:
+      - app-network
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    # volumes:
+    #   - ./backend:/app
+    ports:
+      - '8000:8000'
+    environment:
+      - NODE_ENV=development
+      - PORT=8000
+    command: ['pnpm', 'dev']
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge

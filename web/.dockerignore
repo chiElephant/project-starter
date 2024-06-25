@@ -1,0 +1,10 @@
+.eslint.json
+.gitignore
+.local.env
+README.md
+.git
+.next
+node_modules
+Dockerfile
+.dockerignore
+.DS_Store
