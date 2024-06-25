@@ -49,10 +49,10 @@ jobs:
 
       - name: Build and push frontend Docker image
         run: |
-          docker build -t clintDrifter/project-starter-web:latest ./web
-          docker push clintDrifter/project-starter-web:latest
+          docker build -t clintdrifter/project-starter-web:latest ./web
+          docker push clintdrifter/project-starter-web:latest
 
       - name: Build and push backend Docker image
         run: |
-          docker build -t clintDrifter/project-starter-api:latest ./api
-          docker push clintDrifter/project-starter-api:latest
+          docker build -t clintdrifter/project-starter-api:latest ./api
+          docker push clintdrifter/project-starter-api:latest
