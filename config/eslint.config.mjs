@@ -1,23 +1,30 @@
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import globals from 'globals'
-import pluginJs from '@eslint/js'
+import eslint from '@eslint/js'
+import { FlatCompat } from '@eslint/eslintrc'
 import tseslint from 'typescript-eslint'
-import pluginReact from 'eslint-plugin-react'
-import pluginHooks from 'eslint-plugin-react-hooks'
-import configAirbnb from 'eslint-config-airbnb'
-import configAirbnbBase from 'eslint-config-airbnb-base'
-import configTSairbnb from 'eslint-config-airbnb-typescript'
-import configNext from 'eslint-config-next/core-web-vitals.js'
-import configPrettier from 'eslint-config-prettier'
+import reactRecommended from 'eslint-plugin-react/configs/recommended.js'
+import jest from 'eslint-plugin-jest'
+import prettier from 'eslint-config-prettier'
+import next from '@next/eslint-plugin-next'
 
-export default [
-  // Common settings
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: eslint.configs.recommended,
+  allConfig: eslint.configs.all
+})
+
+export default tseslint.config(
   {
     ignores: [
       '.env',
       '.gitignore',
       'node_modules',
+      'coverage/',
       'logs/',
-      'config/',
       'web/.next/',
       'web/node_modules/',
       'web/public/',
@@ -25,46 +32,68 @@ export default [
       'api/node_modules/'
     ]
   },
-  // FRONTEND
   {
     files: ['web/**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    extends: [
+      ...compat.extends('airbnb', 'airbnb/hooks', 'airbnb-typescript'),
+      eslint.configs.recommended,
+      ...tseslint.configs.recommended,
+      jest.configs['flat/recommended'],
+      ...compat.extends(
+        'plugin:import/recommended',
+        'plugin:import/typescript'
+      ),
+      ...compat.extends(
+        'plugin:react-hooks/recommended',
+        'plugin:react/recommended',
+        'plugin:react/jsx-runtime'
+      ),
+      prettier,
+      ...compat.extends('plugin:@next/next/core-web-vitals')
+    ],
     languageOptions: {
+      ...reactRecommended.languageOptions,
       parser: tseslint.parser,
       parserOptions: {
         ecmaFeatures: { jsx: true },
         project: './web/tsconfig.json'
       },
-      globals: globals.browser
+      globals: {
+        ...globals.browser,
+        ...globals.serviceworker
+      }
     },
     plugins: {
-      'react-hooks': pluginHooks,
-      react: pluginReact,
-      '@typescript-eslint': tseslint,
-      'eslint-config-prettier': configPrettier,
-      'eslint-config-airbnb': configAirbnb,
-      'eslint-config-airbnb-base': configAirbnbBase,
-      'eslint-config-airbnb-typescript': configTSairbnb,
-      'eslint-config-next': configNext
+      '@typescript-eslint': tseslint.plugin,
+      next
     },
     settings: {
       react: {
         version: '18.3.1'
+      },
+      next: {
+        rootDir: './web'
       }
     },
     rules: {
-      ...configAirbnb.rules,
-      ...configTSairbnb.rules,
-      ...configNext.rules,
-      ...pluginReact.configs.recommended.rules,
-      ...configPrettier.rules,
-      ...tseslint.configs.recommended.rules,
-      ...pluginJs.configs.recommended.rules,
+      ...jest.configs['flat/recommended'].rules,
       'react/react-in-jsx-scope': 'off'
     }
   },
   // BACKEND
   {
     files: ['api/**/*.{js,mjs,cjs,ts}'],
+    extends: [
+      ...compat.extends('airbnb-base', 'airbnb-typescript/base'),
+      eslint.configs.recommended,
+      ...tseslint.configs.recommended,
+      jest.configs['flat/recommended'],
+      ...compat.extends(
+        'plugin:import/recommended',
+        'plugin:import/typescript'
+      ),
+      prettier
+    ],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
@@ -72,17 +101,8 @@ export default [
       },
       globals: globals.node
     },
-    plugins: {
-      '@typescript-eslint': tseslint,
-      react: pluginReact,
-      'eslint-config-prettier': configPrettier
-    },
     rules: {
-      ...configAirbnbBase.rules,
-      ...configTSairbnb.rules,
-      ...configPrettier.rules,
-      ...pluginJs.configs.recommended.rules,
-      ...tseslint.configs.recommended.rules
+      ...jest.configs['flat/recommended'].rules
     }
   }
-]
+)

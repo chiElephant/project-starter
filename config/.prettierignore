@@ -5,9 +5,11 @@
 ../node_modules
 ../package.json
 ../pnpm-lock.yaml
+../coverage
 
 # Frontend
 ../web/node_modules
+../web/.next
 ../web/public
 ../web/.gitignore
 ../web/.local.env
