@@ -25,7 +25,7 @@
     "docker:ps": "docker-compose ps | tee logs/docker.log",
     "docker:restart": "docker-compose restart | tee logs/docker.log",
     "test": "jest --colors --passWithNoTests --config=config/jest.config.ts ",
-    "test:watch": "jest --colors --passWithNoTests --config=config/jest.config.ts --setupFilesAfterEnv jest.setup.ts --watch"
+    "test:watch": "jest --colors --passWithNoTests --config=config/jest.config.ts --watch"
   },
   "keywords": [
     "next.js",

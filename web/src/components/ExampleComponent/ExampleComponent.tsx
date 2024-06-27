@@ -1,7 +1,3 @@
-import React from 'react'
-
-const ExampleComponent = () => {
+export default function ExampleComponent() {
   return <div>Hello, World</div>
 }
-
-export default ExampleComponent
