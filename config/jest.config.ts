@@ -10,26 +10,25 @@ const config: Config = {
   bail: 2,
   clearMocks: false,
   collectCoverage: true,
-  coverageDirectory: '../coverage',
   coverageProvider: 'v8',
+  coverageDirectory: '../coverage',
   coverageThreshold: {
     global: { branches: 80, functions: 80, lines: 80, statements: -10 }
   },
   extensionsToTreatAsEsm: ['.ts', '.tsx', '.jsx'],
   notify: true,
   notifyMode: 'always',
-  preset: 'ts-jest',
+  testMatch: [
+    '<rootDir>/**/__tests__/**/*.[jt]s?(x)',
+    '<rootDir>/**/?(*.)+(spec|test).[tj]s?(x)'
+  ],
   projects: [
     {
       displayName: {
         name: 'api',
         color: 'blue'
       },
-      rootDir: './',
-      testMatch: [
-        '<rootDir>/api/**/__tests__/**/*.[jt]s?(x)',
-        '<rootDir>/api/**/?(*.)+(spec|test).[tj]s?(x)'
-      ],
+      rootDir: './api',
       testEnvironment: 'node',
       preset: 'ts-jest',
       testPathIgnorePatterns: ['/node_modules/', '/dist/']
@@ -40,10 +39,6 @@ const config: Config = {
         color: 'magenta'
       },
       rootDir: './web',
-      testMatch: [
-        '<rootDir>/**/__tests__/**/*.[jt]s?(x)',
-        '<rootDir>/**/?(*.)+(spec|test).[tj]s?(x)'
-      ],
       testEnvironment: 'jsdom',
       preset: 'ts-jest',
       setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
@@ -56,7 +51,6 @@ const config: Config = {
   resetMocks: false,
   resetModules: false,
   restoreMocks: false,
-  testLocationInResults: true,
   verbose: true
 }
 

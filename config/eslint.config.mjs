@@ -36,8 +36,9 @@ export default tseslint.config(
     files: ['web/**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     extends: [
       ...compat.extends('airbnb', 'airbnb/hooks', 'airbnb-typescript'),
-      eslint.configs.recommended,
+      ...compat.extends('plugin:@next/next/core-web-vitals'),
       ...tseslint.configs.recommended,
+      eslint.configs.recommended,
       jest.configs['flat/recommended'],
       ...compat.extends(
         'plugin:import/recommended',
@@ -48,8 +49,7 @@ export default tseslint.config(
         'plugin:react/recommended',
         'plugin:react/jsx-runtime'
       ),
-      prettier,
-      ...compat.extends('plugin:@next/next/core-web-vitals')
+      prettier
     ],
     languageOptions: {
       ...reactRecommended.languageOptions,
