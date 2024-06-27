@@ -41,6 +41,9 @@ jobs:
       - name: Format
         run: pnpm format:fix
 
+      - name: Run Jest tests
+        run: pnpm test
+
       - name: Build frontend
         run: pnpm --filter web build
 
