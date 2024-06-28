@@ -15,6 +15,7 @@
 
     "skipLibCheck": true
   },
+  "extends": ["@tsconfig/node20/tsconfig.json"],
   "include": ["src/*.ts"],
   "exclude": ["node_modules", "__tests__"]
 }
