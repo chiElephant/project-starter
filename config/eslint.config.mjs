@@ -29,7 +29,8 @@ export default tseslint.config(
       'web/node_modules/',
       'web/public/',
       'api/dist',
-      'api/node_modules/'
+      'api/node_modules/',
+      'api/__tests__'
     ]
   },
   {

@@ -1,9 +1,4 @@
 import type { Config } from 'jest'
-import nextJest from '../web/node_modules/next/jest.js'
-
-const createJestConfig = nextJest({
-  dir: './web'
-})
 
 const config: Config = {
   automock: false,
@@ -40,7 +35,7 @@ const config: Config = {
       },
       rootDir: './web',
       testEnvironment: 'jsdom',
-      preset: 'ts-jest',
+      transform: { '^.+\\.(ts|tsx|js)$': 'babel-jest' },
       setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
       moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/src/$1'
@@ -54,4 +49,4 @@ const config: Config = {
   verbose: true
 }
 
-export default createJestConfig(config)
+export default config
