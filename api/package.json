@@ -8,6 +8,7 @@
     "build": "pnpm tsc",
     "start": "node --env-file=.env dist/index.js",
     "dev": "nodemon --exec node --env-file=.env --no-warnings=ExperimentalWarning --loader ts-node/esm src/index.ts",
+    "type": "tsc --noEmit",
     "a:log": "sh -c 'pnpm add \"$1\" --reporter ndjson | tee -a ./../logs/pnpm.log' --",
     "d:log": "sh -c 'pnpm add -D \"$1\" --reporter ndjson | tee -a ./../logs/pnpm.log' --",
     "i:log": "pnpm install --reporter ndjson | tee -a ./../logs/pnpm.log"

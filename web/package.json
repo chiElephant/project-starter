@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "type": "tsc --noEmit",
     "a:log": "sh -c 'pnpm add \"$1\" --reporter default | tee ../logs/pnpm.log' --",
     "d:log": "sh -c 'pnpm add -D \"$1\" --reporter default | tee ../logs/pnpm.log' --",
     "i:log": "pnpm install --reporter default | tee ../logs/pnpm.log"

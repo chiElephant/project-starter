@@ -43,7 +43,8 @@ export default tseslint.config(
       jest.configs['flat/recommended'],
       ...compat.extends(
         'plugin:import/recommended',
-        'plugin:import/typescript'
+        'plugin:import/typescript',
+        'plugin:cypress/recommended'
       ),
       ...compat.extends(
         'plugin:react-hooks/recommended',
